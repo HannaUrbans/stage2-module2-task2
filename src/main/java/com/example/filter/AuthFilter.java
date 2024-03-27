@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter("/user/*")
@@ -13,9 +14,9 @@ public class AuthFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpSession session = httpRequest.getSession(false);
 
-
-        if (httpRequest.getSession().getAttribute("user") == null) {
+        if (session == null || session.getAttribute("user") == null) {
             httpResponse.sendRedirect("/login.jsp");
         } else {
             chain.doFilter(request, response);
