@@ -16,9 +16,6 @@ public class ContextListener implements ServletContextListener {
         context.setAttribute("servletTimeInit", now);
         System.out.println("Context initialized at: " + now);
     }
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
 
-    }
 
 }
